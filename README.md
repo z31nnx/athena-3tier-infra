@@ -15,5 +15,5 @@ This project demonstrates the deployment of a modern 3-tier architecture using b
 - RDS database for data storage 
 
 # Tools 
-- This project was used using A Cloud Guru AWS (playground) for cost-effective environment and hands on testing. 
+- This project was done using A Cloud Guru AWS (playground) for cost-effective environment and hands on testing. 
 - The manual build was first documented in Notion with the ease of documentation for efficiency.
