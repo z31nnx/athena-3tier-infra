@@ -118,7 +118,6 @@ The architecture needs a solid private and isolated foundation before it can run
 ![app_step_1](./screenshots/app_step_1.png)
 - The user data is also different, we will have a script to download MySQL as it is needed to communicate with our database later. We will create a new path for the index layer as well. Use the provided user data script here: **[here](./userdata_scripts/app_userdata.sh)**
 - So now for the Auto Scaling Group (ASG), similar to the Web Tier, we’ll create an ASG using our athena-app launch template. We’ll add the athena VPC and our 2 private subnets (athena-subnet-private1 and athena-subnet-private2).
-
 ![app_step_2](./screenshots/app_step_2.png)
 - Now we’ll create another Application Load Balancer (ALB) that routes traffic from our Web Tier to our App Tier. We’ll name it “athena-app-alb”.
 - It will not be internet facing this time, it’ll be internal, since we’ll be routing traffic internally through our Web Tier, not the internet.
@@ -134,7 +133,6 @@ The architecture needs a solid private and isolated foundation before it can run
 - From our EC2 instances, let's copy the instance ID of one of our web instances. Search Systems Manager (SSM), on the left side bar, select session manager. Click on start a session, it's optional to add a reason but I put “Admin”. For the target instance, paste the instance ID and let's open a session. 
 ![app_step_7](./screenshots/app_step_7.png)
 - Okay let's go back to our athena-app-alb and copy the DNS which will be used to test our connection if our app is working. 
-
 ![app_step_8](./screenshots/app_step_8.png)
 - Let's use the curl command with the copied DNS with the correct path for testing: 
 
@@ -173,7 +171,6 @@ The architecture needs a solid private and isolated foundation before it can run
 - You will be prompted to enter a password, enter the password you chose when we created the database.
 ![Data_step_11](./screenshots/Data_step_11.png)
 - Additionally you could use this command to see your database: 
-
 - ```show database;```
 - We’ve successfully connected to the database from our App Tier instance.
 
