@@ -80,30 +80,30 @@ The architecture needs a solid private and isolated foundation before it can run
 - We are now ready to start our web tier. But first we must create our web server launch template and it will be used by our ASG to dynamically launch EC2 instances in our public subnets. In the console, search for launch template and it should be under EC2 feature. 
 - I named my web server launch template “athena-web-lt”. Under “Application and OS Images (Amazon Machine Image)”, proceed to quick start and select “Amazon Linux 2 AMI” with an instance type of t3.micro. There’s no requirement for a key, we’ll be using an SSM instead of SSH for better security. 
 - On network settings, you can skip specifying a subnet since the Auto Scaling Group will handle subnet placement. But here, we will use the security group athena-web-sg that we created prior. 
-![Web_step_1](./screenshots/Web_step_1.png)
+![web_step_1](./screenshots/web_step_1.png)
 - Under advanced detail, here we will add our IAM role that we created prior. This allows our web ec2 instances to have access with SSM remote connection and CloudWatch monitoring. 
-![Web_step_2](./screenshots/Web_step_2.png)
+![web_step_2](./screenshots/web_step_2.png)
 - Use the following user data script to bootstrap the web EC2 instances: **[here](./userdata_scripts/web_userdata.sh)**
 - And that concludes the web tier launch template.
 - Let's proceed with the Auto Scaling Group (ASG), which ensures high availability. It automatically provisions EC2 instances across our public subnets as needed. 
 - Navigate through the ASG console using the search bar. I named my ASG “athena-web-asg” and we will select the athena-web-lt that we created for the launch template. 
 - Under network settings, we must include our athena vpc along with our 2 public subnets. 
-![Web_step_3](./screenshots/Web_step_3.png)
+![web_step_3](./screenshots/web_step_3.png)
 - ALB (Application Load Balancer) is critical here as it is needed to evenly distribute traffic to our EC2 instances. I named mine athena-web-alb with internet facing as it allows it to listen to HTTP/HTTPS.
-![Web_step_4](./screenshots/Web_step_4.png)
+![web_step_4](./screenshots/web_step_4.png)
 - A target group is required to distribute the load on our instances and listen to HTTP on port 80. 
-![Web_step_5](./screenshots/Web_step_5.png)
+![web_step_5](./screenshots/web_step_5.png)
 - The health check is important, It should be enabled. Health checks increase availability by monitoring instance health and automatically replacing any unhealthy instances. It also shows if your web is reachable, it checks the path (index.html) to see if it has one running.
 - For the group size, we want a desired capacity of 2, a minimum of 2 and a max of 5. This ensures high availability because 2 instances will be running. If one instances messes up, a backup is available. If it requires additional instances then it can scale up to 5 instances. 
-![Web_step_6](./screenshots/Web_step_6.png)
+![web_step_6](./screenshots/web_step_6.png)
 - Under additional settings, there is an option to enable group metrics using CloudWatch, it's optional but I highly recommend enabling it. It gives us birds eye view for high observability and faster troubleshooting since we’re maintaining multi instances. 
 - Review the ASG and create the group. This concludes the Web Tier setup.
 - Before we test it, the ASG wizard by default auto-assign the athena-web-sg that we added on our launch template to our web-alb. So we must change the security group to use the athena-alb-sg instead of the athena-web-sg in our ALB console. 
 - To do so, navigate to the ALB console, under security we are able to edit the security group.
-![Web_step_7](./screenshots/Web_step_7.png)
+![web_step_7](./screenshots/web_step_7.png)
 - Once we update the security group of our ALB from default athena-web-sg to athena-alb-sg then we can copy the DNS and paste it in our web browser. 
 - You should see the message “Hello from Athena Web Tier” along with the private IP of the responding instance. If we refresh it, we should see the second IP, and this validates that the application load balancer is working and evenly distributing traffic. 
-![Web_step_8](./screenshots/Web_step_8.png)
+![web_step_8](./screenshots/web_step_8.png)
 - We have successfully finished creating our web tier. This is the presentation layer, where the users will interact. 
 
 # App Tier Requirements 
@@ -117,7 +117,8 @@ The architecture needs a solid private and isolated foundation before it can run
 - Let's create the application launch template “athena-app-lt” with the same settings as our web launch template (Amazon Linux 2 AMI, t3.micro, IAM athena-ops-role) which will allow us to connect from our Web to App Tier for testing and ops work using Systems Manager (SSM) and attach the athena-app-sg for the security group.
 ![app_step_1](./screenshots/app_step_1.png)
 - The user data is also different, we will have a script to download MySQL as it is needed to communicate with our database later. We will create a new path for the index layer as well. Use the provided user data script here: **[here](./userdata_scripts/app_userdata.sh)**
-- So now for the Auto Scaling Group (ASG), similar to the Web Tier, we’ll create an ASG using our athena-app launch template. We’ll add the athena VPC and our 2 private subnets (athena-subnet-private1 and athena-subnet-private2). 
+- So now for the Auto Scaling Group (ASG), similar to the Web Tier, we’ll create an ASG using our athena-app launch template. We’ll add the athena VPC and our 2 private subnets (athena-subnet-private1 and athena-subnet-private2).
+
 ![app_step_2](./screenshots/app_step_2.png)
 - Now we’ll create another Application Load Balancer (ALB) that routes traffic from our Web Tier to our App Tier. We’ll name it “athena-app-alb”.
 - It will not be internet facing this time, it’ll be internal, since we’ll be routing traffic internally through our Web Tier, not the internet.
@@ -133,6 +134,7 @@ The architecture needs a solid private and isolated foundation before it can run
 - From our EC2 instances, let's copy the instance ID of one of our web instances. Search Systems Manager (SSM), on the left side bar, select session manager. Click on start a session, it's optional to add a reason but I put “Admin”. For the target instance, paste the instance ID and let's open a session. 
 ![app_step_7](./screenshots/app_step_7.png)
 - Okay let's go back to our athena-app-alb and copy the DNS which will be used to test our connection if our app is working. 
+
 ![app_step_8](./screenshots/app_step_8.png)
 - Let's use the curl command with the copied DNS with the correct path for testing: 
 
