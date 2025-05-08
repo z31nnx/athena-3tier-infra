@@ -5,9 +5,9 @@ When building a modern cloud application, there are many key considerations such
 
 A 3-tier architecture tackles modern cloud challenges by separating concerns across three distinct layers:
 
-- Web Tier (Presentation Layer): The front-facing component where users interact with the application.
-- App Tier (Logic Layer): The backend, responsible for business logic, authentication, and application processing.
-- Database Tier (Persistence Layer): The secure vault that stores sensitive data such as user credentials, session tokens, and transaction history.
+- **Web Tier (Presentation Layer):** The front-facing component where users interact with the application.
+- **App Tier (Logic Layer):** The backend, responsible for business logic, authentication, and application processing.
+- **Database Tier (Persistence Layer):** The secure vault that stores sensitive data such as user credentials, session tokens, and transaction history.
 
 By distributing these tiers across multiple Availability Zones (AZs) and isolating them using subnets and security groups, this architecture achieves high availability, fault tolerance, and tight security boundaries, which adheres to AWS best practices.
 
@@ -17,7 +17,7 @@ By distributing these tiers across multiple Availability Zones (AZs) and isolati
 
 # Virtual Private Cloud (VPC)
 The architecture needs a solid private and isolated foundation before it can run. A VPC is required which will be the base environment for the 3-tier to run in. This isolates our environment from the public internet, it ensures privacy so that our resources can run in a secure environment. 
-- Requirements: 
+- **Requirements:** 
     - Two (2) Public Subnets to host the Web Tier
     - Two (2) Private Subnets for the App Tier 
     - Two (2) Private Subnets for the Database Tier
@@ -42,11 +42,11 @@ The architecture needs a solid private and isolated foundation before it can run
 # Security Groups 
 - I always like to start with the security groups, instead of creating them on the spot. This way, we can just insert them during our build.
 - There will be Five (5) security groups: 
-    - athena-web-alb-sg : Allows public HTTP/HTTPS traffic to the Web ALB.
-    - athena-web-sg : Accepts HTTP from athena-web-alb-sg only.
-    - athena-app-alb-sg : Accepts HTTP from athena-web-sg (Web Tier to App ALB). 
-    - athena-app-sg : Accepts HTTP from athena-app-alb-sg (App ALB to App EC2s).
-    - athena-data-sg : Accepts MySQL (3306) from athena-app-sg only.
+    - **athena-web-alb-sg** : Allows public HTTP/HTTPS traffic to the Web ALB.
+    - **athena-web-sg** : Accepts HTTP from athena-web-alb-sg only.
+    - **athena-app-alb-sg** : Accepts HTTP from athena-web-sg (Web Tier to App ALB). 
+    - **athena-app-sg** : Accepts HTTP from athena-app-alb-sg (App ALB to App EC2s).
+    - **athena-data-sg** : Accepts MySQL (3306) from athena-app-sg only.
 - We start with our athena-web-alb-sg. Inbound rule to allow HTTP/HTTPS on port 80/443 to 0.0.0.0/0 (Anywhere).
 ![SG_step_1](./screenshots/SG_step_1.png)
 - Now let's continue with our athena-web-sg. As shown above, it's critical to allow inbound rule HTTP on port 80 with a custom source using our athena-web-alb-sg. This ensures that our ALB is only accessible using the ALB DNS and eliminates connection using the public IP’s from our public EC2’s. 
