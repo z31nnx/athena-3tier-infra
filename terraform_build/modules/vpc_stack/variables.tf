@@ -8,7 +8,9 @@ variable "cidr_block" {
 }
 
 # For tags 
-variable "owner" {}
 variable "environment" {}
-variable "team" {}
+variable "project" {}
+variable "owner" {}
+variable "managedby" {}
+
 

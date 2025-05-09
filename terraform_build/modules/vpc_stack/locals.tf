@@ -11,10 +11,10 @@ locals {
     private_subnet_4 = { cidr_block = "10.0.6.0/24", az = "us-east-1b" }
   }
   default_tags = {
-    Name         = "${var.vpc_name}"
-    Environment  = "${var.environment}"
-    Team         = "${var.team}"
-    Owner        = "${var.owner}"
-    CreationDate = formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())
+    Name        = "${var.vpc_name}"
+    Environment = "${var.environment}"
+    Project     = "${var.project}"
+    Owner       = "${var.owner}"
+    ManagedBy   = "${var.managedby}"
   }
 }

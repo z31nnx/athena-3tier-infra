@@ -4,7 +4,7 @@ resource "aws_vpc" "athena_vpc" { # The VPC
 
   tags = merge(local.default_tags, { # Combines custom resource name with standard tags
     Name = "${var.vpc_name}-vpc"
-  }) 
+  })
 }
 
 # The VPC's Internet Gateway which allows us to connect to the internet
@@ -81,7 +81,7 @@ resource "aws_route_table" "athena_private_rt" {
   vpc_id = aws_vpc.athena_vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.athena_natgw.id
   }
 
