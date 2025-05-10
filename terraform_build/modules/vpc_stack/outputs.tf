@@ -4,11 +4,20 @@ output "vpc_id" {
 }
 
 output "public_subnets_id" {
-  value = [for i in aws_subnet.public_subnets : i.id]
+  value = [for subnet in aws_subnet.public_subnets : subnet.id]
 }
 
 output "private_subnets_id" {
-  value = [for i in aws_subnet.private_subnets : i.id]
+  value = [for subnet in aws_subnet.private_subnets : subnet.id]
+}
+
+# Outputs exactly 2 private subnets, one from each AZ to prevent ALB errors
+# ALBs require one subnet per Availability Zone, including duplicates would cause deployment failure
+output "private_subnets_id_for_alb" {
+  value = [
+    aws_subnet.private_subnets["private_subnet_1"].id,
+    aws_subnet.private_subnets["private_subnet_2"].id
+  ]
 }
 
 output "igw_id" {

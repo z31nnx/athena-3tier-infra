@@ -1,6 +1,12 @@
 /*This section allows us to define parameters for our infrastructure without hardcoding 
 them in our main.tf which allows us to have flexible and reusable configurations*/
 
+# For tags 
+variable "environment" {}
+variable "project" {}
+variable "owner" {}
+variable "managedby" {}
+
 variable "sg_names" { # A map of security group names, allows choosing names for the code 
   type = map(string)
   default = {
@@ -22,9 +28,3 @@ variable "sg_ports" {      # Port numbers, used in dynamic blocks
 }
 
 variable "vpc_id" {} # The VPC from the VPC module, it will be used in security groups resources 
-
-# For tags 
-variable "environment" {}
-variable "project" {}
-variable "owner" {}
-variable "managedby" {}
