@@ -11,9 +11,9 @@ output "private_subnets_id" {
   value = [for subnet in aws_subnet.private_subnets : subnet.id]
 }
 
-# Outputs exactly 2 private subnets, one from each AZ to prevent ALB errors
+# Outputs exactly 2 private subnets, one from each AZ to prevent conflicting errors
 # ALBs require one subnet per Availability Zone, including duplicates would cause deployment failure
-output "private_subnets_id_for_alb" {
+output "private_subnets_id_per_az" {
   value = [
     aws_subnet.private_subnets["private_subnet_1"].id,
     aws_subnet.private_subnets["private_subnet_2"].id

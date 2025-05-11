@@ -1,12 +1,6 @@
-/*This section allows us to define parameters for our infrastructure without hardcoding 
-them in our main.tf which allows us to have flexible and reusable configurations*/
-
-# For tags 
-variable "environment" {}
-variable "project" {}
-variable "owner" {}
-variable "managedby" {}
-
+variable "tags" {
+  type = map(string)
+}
 variable "iam_role_name" {}
 variable "iam_instance_profile_name" {}
 variable "iam_managed_policies" {

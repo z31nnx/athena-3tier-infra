@@ -144,7 +144,7 @@ The architecture needs a solid private and isolated foundation before it can run
 # Database Tier
 
 - We are on the last stage of our architecture. Every application needs a database which is a way to store important data such as user login info, session data, transactions, etc. We have the Web Tier as the pretty face, App as the brain and now the Database will become the secret vault.
-- We’ve already created the security group for the database so let's proceed with the database subnet group. Search “Aurora and RDS” and on the left side bar, select subnet groups.
+- We’ve already created the security group for the database so let's proceed with the database subnet group. Search “RDS” and on the left side bar, select subnet groups.
 - Make sure to select our athena VPC, along with the correct “us-east-1a and us-east-1b” availability zones with our last private subnets 3 and 4. 
 ![Data_step_1](./screenshots/Data_step_1.png)
 - Now let's create the database, and AWS offers several types of databases but for this project we are going to proceed with MySQL RDS Database. 
