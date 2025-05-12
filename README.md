@@ -5,8 +5,8 @@ This project is a resilient, highly available, and secure 3-tier AWS architectur
 This project demonstrates the deployment of a modern 3-tier architecture using both manual steps and Infrastructure as Code (IaC). It incorporates core AWS services to ensure scalability, availability, and security. 
 
 ## Builds
-- Manual build: **[manual_build/README.md](/manual_build/README.MD)**
-- Terraform build: **[terraform_build/README.md](/terraform_build/README.MD)**
+- Manual build: **[manual_build](/manual_build/README.MD)**
+- Terraform build: **[terraform_build](/terraform_build/README.MD)**
 
 # Key Features
 - VPC with Public & Private Subnets 
