@@ -32,29 +32,33 @@ It mirrors a production-ready cloud environment with:
 - **AWS CLI v2**: [Setup Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)  
 - **Quick Setup (`aws configure`)**: [Tutorial](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html)  
 - Provide your own `.tfvars` with variable inputs (excluded from repo for security).  
-- A sample file is included: [terraform.tfvars.example](/terraform/terraform.tfvars.example)  
+- A sample file is included: [dev.tfvars.example](/examples/dev.tfvars.example)  
+- When running `terraform apply`, the `-var-file` flag must exactly match your file name.  
 
-⚠️ **Never commit tfvars with secrets to version control.**
+## Notes
+- ⚠️ **Never commit tfvars file to version control.**
+- ⚠️ **RDS destroy note:** By default `skip_final_snapshot = true`, safe for sandbox, **not recommended for production**.
 
 ## How to Deploy
 ```bash
 # Navigate into dev environment
-cd terraform/envs/dev
+cd ./trident-aws-3tier/terraform/envs/dev
 
 # Initialize modules & backend
 terraform init
 
 # Preview infrastructure changes
-terraform plan -var-file="terraform.tfvars"
+terraform plan -var-file="dev.tfvars"
 
 # Deploy
-terraform apply -var-file="terraform.tfvars"
+terraform apply -var-file="dev.tfvars"
 
 ```
 ## How to destroy  
 ```bash
-cd terraform/envs/dev
-terraform destroy -var-file="terraform.tfvars"
+# Nuke infra
+cd ./trident-aws-3tier/terraform/envs/dev
+terraform destroy -var-file="dev.tfvars"
 ```
 
 ## Manual Documentation

@@ -1,5 +1,8 @@
 # Trident AWS 3-Tier Infra
-This project is a resilient, highly available, and secure 3-tier AWS architecture deployed manually and with **Terraform** (IaC). 
+[![Terraform CI](https://github.com/z31nnx/trident-aws-3tier/actions/workflows/terraform.yml/badge.svg)](https://github.com/z31nnx/trident-aws-3tier/actions/workflows/terraform.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+Trident is a resilient, highly available, and secure AWS 3-tier architecture deployed manually and with **Terraform** (IaC). 
 
 > **Renaming Notice — Sep 2025**
 >
@@ -25,9 +28,17 @@ This project demonstrates the deployment of a modern 3-tier architecture using b
 - IAM Role for EC2 aligning with best practices 
 - RDS database for data storage 
 
-# Tools 
-- This project was done using A Cloud Guru AWS (playground) for cost-effective environment and hands on testing. 
-- The manual build was first documented in Notion with the ease of documentation for efficiency.
+## Notes  
+- This project demonstrates both practical infrastructure understanding and the ability to deploy it using code.
+- Manual build was first documented in Notion with the ease of documentation for efficiency. 
+- The project name was initially Athena but due to collision, I have changed it to Trident, still a fitting name. 
+- This was my first real project that I took time on, I will improve it as time goes and with more experience I get towards my journey in Cloud and Cybersecurity. 
 
---- 
-> This project demonstrates both practical infrastructure understanding and the ability to deploy it using code.  
+## Costs 
+-  This project was built/tested in A Cloud Guru’s AWS sandbox to avoid real-world charges.
+- There are cost considerations when this architecture gets deployed in a real AWS account. 
+- I recommend checking [AWS Pricing Calculator](https://calculator.aws/#/) to estimate total costs. 
+
+## License
+This project is licensed under the [MIT License](./LICENSE).
+
