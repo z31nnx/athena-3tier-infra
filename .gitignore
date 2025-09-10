@@ -7,6 +7,7 @@
 **/*.tfstate.*
 
 # Crash log files
+**/.terraform.d/
 **/*crash.log
 **/crash.*.log
 
@@ -32,10 +33,166 @@
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+**/*.plan
+**/*tfplan*
+**/*dev-tfplan*
+**/*prod-tfplan*
 
 # Ignore CLI configuration files
 **/*.terraformrc
 **/terraform.rc
 
-# Temporary development data 
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+**/*.pyd
+**/*.pyc
+
+# C extensions build output
+**/build/
+**/develop-eggs/
+**/dist/
+**/downloads/
+**/eggs/
+**/.eggs/
+**/lib/
+**/lib64/
+**/parts/
+**/sdist/
+**/var/
+**/wheels/
+**/share/python-wheels/
+
+# PyInstaller
+**/*.manifest
+**/*.spec
+
+# Installer logs
+**/pip-log.txt
+**/pip-delete-this-directory.txt
+
+# Unit test / coverage / profiling
+**/htmlcov/
+**/.tox/
+**/.nox/
+**/.coverage
+**/.coverage.*
+**/.cache
+**/.pytest_cache/
+**/nosetests.xml
+**/coverage.xml
+**/*.cover
+**/.hypothesis/
+**/.mypy_cache/
+**/.dmypy.json
+**/.pyre/
+**/.pytest_cache/
+**/.benchmarks/
+
+# IPython/Jupyter
+**/.ipynb_checkpoints
+**/*.ipynb_checkpoints
+**/profile_default/
+**/ipython_config.py
+
+# pyenv/virtualenv
+**/.python-version
+**/env/
+**/venv/
+**/.env/
+**/.venv/
+**/ENV/
+**/env.bak/
+**/venv.bak/
+
+# PDM, Poetry, Pipenv
+**/Pipfile.lock
+**/poetry.lock
+**/.pdm.toml
+**/.pdm.lock
+**/.pdm-python
+
+# VS Code & JetBrains IDEs
+**/.vscode/
+**/.idea/
+**/.spyderproject
+**/.spyproject
+**/.ropeproject
+
+# macOS/Windows/OS junk
+**/.DS_Store
+**/Thumbs.db
+**/Desktop.ini
+
+# Logs
+**/*.log
+
+# Node
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Local dotenv, secrets
+**/.env
+**/.env.*
+**/.secrets
+**/.secret
+**/.credentials
+**/*.env
+
+# Docker
+**/docker-compose*.yml
+**/Dockerfile*
+**/.dockerignore
+
+# Miscellaneous
+**/.ipynb_checkpoints/
+**/instance/
+**/.mypy_cache/
+**/.pytest_cache/
+**/.coverage
+**/.coverage.*
+**/.cache
+**/pyrightconfig.json
+
+# Security: Ignore files likely to have secrets
+**/*.pem
+**/*.key
+**/*.crt
+**/*.pfx
+**/*.p12
+**/*.jks
+
+# User custom scratch area (temporary dev data)
 safe/
+
+# Lambda
+**/*.zip
+**/package-lock.json
+**/requirements.txt.lock
+lambda-functions/**/.build/
+lambda-functions/**/*.zip
+lambda-functions/**/dist/
+lambda-functions/**/build/
+lambda-functions/**/__pycache__/
+lambda-functions/**/*.pyc
+lambda-functions/**/.pytest_cache/
+lambda-functions/**/.mypy_cache/
+lambda-functions/**/.coverage
+lambda-functions/**/coverage/
+lambda-functions/**/venv/
+lambda-functions/**/.venv/
+lambda-functions/**/node_modules/
+lambda-functions/**/npm-debug.log
+lambda-functions/**/yarn-error.log
