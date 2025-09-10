@@ -28,3 +28,6 @@ This project demonstrates the deployment of a modern 3-tier architecture using b
 # Tools 
 - This project was done using A Cloud Guru AWS (playground) for cost-effective environment and hands on testing. 
 - The manual build was first documented in Notion with the ease of documentation for efficiency.
+
+--- 
+> This project demonstrates both practical infrastructure understanding and the ability to deploy it using code.  
