@@ -25,7 +25,7 @@ data "aws_ami" "amazon_linux_2" {
 
 # Web launch template 
 resource "aws_launch_template" "trident_web_lt" {
-  name          = var.launch_template_names["web"]
+  name          = "${var.name_prefix}-${var.launch_template_names["web"]}"
   image_id      = data.aws_ami.amazon_linux_2.id
   instance_type = var.instance_types
   description   = "The web launch template for Trident"
@@ -75,7 +75,7 @@ resource "aws_launch_template" "trident_web_lt" {
   }
 
   tags = {
-    Name = "${var.launch_template_names["web"]}"
+    Name = "${var.name_prefix}-${var.launch_template_names["web"]}"
   }
 
   # Creates the templayte first before destroying 
@@ -86,7 +86,7 @@ resource "aws_launch_template" "trident_web_lt" {
 
 # App launch template
 resource "aws_launch_template" "trident_app_lt" {
-  name          = var.launch_template_names["app"]
+  name          = "${var.name_prefix}-${var.launch_template_names["app"]}"
   image_id      = data.aws_ami.amazon_linux_2.id
   instance_type = var.instance_types
   description   = "The app launch template for Trident"
@@ -136,7 +136,7 @@ resource "aws_launch_template" "trident_app_lt" {
   }
 
   tags = {
-    Name = "${var.launch_template_names["app"]}"
+    Name = "${var.name_prefix}-${var.launch_template_names["app"]}"
   }
 
   # Creates the templayte first before destroying 
